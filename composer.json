@@ -1,0 +1,24 @@
+{
+	"name": "inteve/navigation",
+	"type": "library",
+	"description": "Navigation component for Nette Framework.",
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Jan Pecha",
+			"homepage": "https://www.janpecha.cz/"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"nette/application": "^2.2",
+		"nette/utils": "^2.2",
+		"latte/latte": "^2.2"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"require-dev": {
+		"nette/tester": "^1.7"
+	}
+}

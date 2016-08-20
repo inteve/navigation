@@ -1,0 +1,17 @@
+
+<div class="breadcrumbs" n:if="!empty($items)">
+	<div class="breadcrumbs__inner">
+	{foreach $items as $item}
+		<span class="breadcrumbs__separator">/</span>
+
+		{if !$iterator->last}
+			{var $destination = $item->getDestination()}
+			<a n:if="$destination !== NULL" href="{plink $item->getDestination(), (expand) $item->getParameters()}" class="breadcrumbs__item">{$item->getLabel()}</a>
+			<span n:if="$destination === NULL" class="breadcrumbs__item">{$item->getLabel()}</span>
+
+		{else}
+			<span class="breadcrumbs__item breadcrumbs__item--active">{$item->getLabel()}</span>
+		{/if}
+	{/foreach}
+	</div>
+</div>

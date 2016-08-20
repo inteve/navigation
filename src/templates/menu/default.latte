@@ -1,0 +1,11 @@
+
+<div class="menu" n:if="!empty($items)">
+	<div class="menu__inner">
+	{foreach $items as $item}
+		{var $page = $item[page]}
+		{var $destination = $page->getDestination()}
+		<a n:if="$destination !== NULL" href="{plink $page->getDestination(), (expand) $page->getParameters()}" class="menu__item">{$page->getLabel()}</a>
+		<span n:if="$destination === NULL" class="menu__item">{$page->getLabel()}</span>
+	{/foreach}
+	</div>
+</div>

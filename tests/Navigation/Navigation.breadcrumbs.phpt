@@ -24,7 +24,9 @@ function createNavigation()
 	$navigation->addItem('Detail', 'detail', array('show' => TRUE));
 
 	$navigation->addItemBefore('news/2016', 'By year', 'news-by-year', array('year' => 2016));
+	$navigation->addItemBefore('news/2016', 'Listing');
 	$navigation->addItemAfter('news/2016', 'This year', 'this-year');
+	$navigation->addItemAfter('news/2016', 'Edit');
 
 	return $navigation;
 }
@@ -88,6 +90,11 @@ test(function () {
 			'parameters' => array('year' => 2016),
 		),
 		array(
+			'label' => 'Listing',
+			'destination' => NULL,
+			'parameters' => array(),
+		),
+		array(
 			'label' => 'News 2016',
 			'destination' => '/news/2016/',
 			'parameters' => array(),
@@ -95,6 +102,11 @@ test(function () {
 		array(
 			'label' => 'This year',
 			'destination' => 'this-year',
+			'parameters' => array(),
+		),
+		array(
+			'label' => 'Edit',
+			'destination' => NULL,
 			'parameters' => array(),
 		),
 		array(

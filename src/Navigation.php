@@ -205,13 +205,13 @@
 				do {
 					if (isset($this->pages[$currentPage])) { // pokud stranka existuje
 						if (isset($this->afterItems[$currentPage])) { // array_reverse
-							$items = array_merge($items, $this->afterItems[$currentPage]);
+							$items = array_merge($items, array_reverse($this->afterItems[$currentPage]));
 						}
 
 						$items[] = $this->pages[$currentPage];
 
 						if (isset($this->beforeItems[$currentPage])) { // array_reverse
-							$items = array_merge($items, $this->beforeItems[$currentPage]);
+							$items = array_merge($items, array_reverse($this->beforeItems[$currentPage]));
 						}
 					}
 

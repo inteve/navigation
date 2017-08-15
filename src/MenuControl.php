@@ -2,11 +2,10 @@
 
 	namespace Inteve\Navigation;
 
-	use Nette\Application\UI\Control;
 	use Nette\Utils\Strings;
 
 
-	class MenuControl extends Control
+	class MenuControl extends BaseControl
 	{
 		const TEMPLATE_DEFAULT = 'default';
 

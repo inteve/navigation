@@ -11,7 +11,7 @@ require __DIR__ . '/../bootstrap.php';
 function createNavigation()
 {
 	$navigation = new Navigation;
-	$navigation->addPage('/', 'Homepage', '/');
+	$navigation->addPage('/', 'Homepage', 'Homepage:default');
 	$navigation->addPage('news', 'News');
 	$navigation->addPage('news/2016', 'News 2016', '/news/2016/');
 	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/2016/', array('page' => 1));
@@ -34,7 +34,7 @@ test(function () {
 		'	<div class="breadcrumbs__inner">',
 		'		<span class="breadcrumbs__separator">/</span>',
 		'',
-		'			<a href="presenter:/?" class="breadcrumbs__item">Homepage</a>',
+		'			<a href="#presenter=:Homepage:default?" class="breadcrumbs__item">Homepage</a>',
 		'',
 		'		<span class="breadcrumbs__separator">/</span>',
 		'',
@@ -42,7 +42,7 @@ test(function () {
 		'',
 		'		<span class="breadcrumbs__separator">/</span>',
 		'',
-		'			<a href="presenter:/news/2016/?" class="breadcrumbs__item">News 2016</a>',
+		'			<a href="/news/2016/" class="breadcrumbs__item">News 2016</a>',
 		'',
 		'		<span class="breadcrumbs__separator">/</span>',
 		'',

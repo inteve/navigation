@@ -25,9 +25,10 @@ function extractItems(array $items)
 
 function extractItem(\Inteve\Navigation\NavigationItem $item)
 {
+	$destination = $item->getDestination();
 	return array(
 		'label' => $item->getLabel(),
-		'destination' => $item->getDestination(),
+		'destination' => $destination instanceof \Inteve\Navigation\Url ? $destination->getUrl() : $destination,
 		'parameters' => $item->getParameters(),
 	);
 }
@@ -58,7 +59,7 @@ class MockPresenter extends \Nette\Application\UI\Presenter
 			$args = array_slice(func_get_args(), 1);
 		}
 
-		return 'presenter:' . $destination . '?' . http_build_query($args);
+		return '#presenter=' . $destination . '?' . http_build_query($args);
 	}
 
 

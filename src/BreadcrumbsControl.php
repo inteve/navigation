@@ -2,10 +2,8 @@
 
 	namespace Inteve\Navigation;
 
-	use Nette\Application\UI\Control;
 
-
-	class BreadcrumbsControl extends Control
+	class BreadcrumbsControl extends BaseControl
 	{
 		const TEMPLATE_DEFAULT = 'default';
 

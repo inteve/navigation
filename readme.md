@@ -55,7 +55,7 @@ class NewsPresenter extends Nette\Application\UI\Form
 	{
 		// render items 'News 2016' & 'News 2015'
 		$menu = new MenuControl($this->navigation);
-		$menu->setParentPage('news');
+		$menu->setSubTree('news');
 		return $menu;
 	}
 }

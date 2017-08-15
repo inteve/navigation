@@ -31,7 +31,7 @@ test(function () {
 
 	$presenter = new MockPresenter;
 	$presenter['menu'] = new MenuControl($navigation);
-	$presenter['menu']->setParentPage('news');
+	$presenter['menu']->setSubTree('news');
 
 	Assert::same(implode("\n", array(
 		'',

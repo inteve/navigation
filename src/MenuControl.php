@@ -13,7 +13,7 @@
 		private $navigation;
 
 		/** @var string|NULL */
-		private $parentPage;
+		private $subTree;
 
 		/** @var string */
 		private $templateFile;
@@ -41,11 +41,20 @@
 
 
 		/**
-		 * @param  string|NULL
+		 * @deprecated  use setSubTree()
 		 */
 		public function setParentPage($parentPage)
 		{
-			$this->parentPage = Navigation::formatPageId($parentPage);
+			return $this->setSubTree($parentPage);
+		}
+
+
+		/**
+		 * @param  string|NULL
+		 */
+		public function setSubTree($subTree)
+		{
+			$this->subTree = Navigation::formatPageId($subTree);
 			return $this;
 		}
 
@@ -56,13 +65,13 @@
 		public function render()
 		{
 			$items = array();
-			$parentPage = $this->parentPage . '/';
-			$parentLevel = substr_count($parentPage, '/');
+			$subTree = $this->subTree . '/';
+			$subTreeLevel = substr_count($subTree, '/');
 
 			foreach ($this->navigation->getPages() as $pageId => $page) {
 				$pageLevel = substr_count($pageId, '/');
 
-				if (Strings::startsWith($pageId, $parentPage) && $parentLevel === $pageLevel) {
+				if (Strings::startsWith($pageId, $subTree) && $subTreeLevel === $pageLevel) {
 					$items[] = array(
 						'page' => $page,
 						'level' => 0,

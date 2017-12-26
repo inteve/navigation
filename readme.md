@@ -3,6 +3,18 @@
 
 Navigation component for Nette Framework.
 
+
+## Installation
+
+[Download a latest package](https://github.com/inteve/navigation/releases) or use [Composer](http://getcomposer.org/):
+
+```
+composer require inteve/navigation
+```
+
+`Inteve\Navigation` requires PHP 5.3.0 or later and Nette 2.2.
+
+
 ## Usage
 
 ### Define pages
@@ -82,19 +94,6 @@ class Presenter extends Nette\Application\UI\Form
 	}
 }
 ```
-
-
-Installation
-------------
-
-[Download a latest package](https://github.com/inteve/navigation/releases) or use [Composer](http://getcomposer.org/):
-
-```
-composer require [--dev] inteve/navigation
-```
-
-`Inteve\Navigation` requires PHP 5.3.0 or later and Nette 2.2.
-
 
 ------------------------------
 

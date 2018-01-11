@@ -18,6 +18,9 @@
 		/** @var string */
 		private $templateFile;
 
+		/** @var array|NULL */
+		private $ignoredPages;
+
 
 		public function __construct(Navigation $navigation)
 		{
@@ -60,6 +63,27 @@
 
 
 		/**
+		 * @param  string[]|NULL
+		 */
+		public function setIgnoredPages(array $ignoredPages = NULL)
+		{
+			if ($ignoredPages === NULL) {
+				$this->ignoredPages = NULL;
+				return $this;
+			}
+
+			$navigation = $this->navigation;
+
+			foreach ($ignoredPages as $ignoredPage) {
+				$ignoredPage = $navigation::formatPageId($ignoredPage);
+				$this->ignoredPages[$ignoredPage] = TRUE;
+			}
+
+			return $this;
+		}
+
+
+		/**
 		 * @return void
 		 */
 		public function render()
@@ -69,6 +93,10 @@
 			$subTreeLevel = substr_count($subTree, '/');
 
 			foreach ($this->navigation->getPages() as $pageId => $page) {
+				if (isset($this->ignoredPages[$pageId])) {
+					continue;
+				}
+
 				$pageLevel = substr_count($pageId, '/');
 
 				if (Strings::startsWith($pageId, $subTree) && $subTreeLevel === $pageLevel) {

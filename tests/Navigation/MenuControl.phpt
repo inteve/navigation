@@ -91,3 +91,19 @@ test(function () {
 	)), renderControl($presenter['menu']));
 
 });
+
+
+test(function () {
+
+	$navigation = createNavigation();
+
+	$presenter = new MockPresenter;
+	$presenter['menu'] = new MenuControl($navigation);
+	$presenter['menu']->setIgnoredPages(array('/', 'news/'));
+
+	Assert::same(implode("\n", array(
+		'',
+		'',
+	)), renderControl($presenter['menu']));
+
+});

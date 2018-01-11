@@ -12,7 +12,7 @@ Navigation component for Nette Framework.
 composer require inteve/navigation
 ```
 
-`Inteve\Navigation` requires PHP 5.3.0 or later and Nette 2.2.
+`Inteve\Navigation` requires PHP 5.3.0 or later and Nette 2.2+.
 
 
 ## Usage
@@ -60,7 +60,7 @@ use Inteve\Navigation\MenuControl;
 class NewsPresenter extends Nette\Application\UI\Form
 {
 	/** @var Navigation @inject */
-	private $navigation;
+	public $navigation;
 
 
 	protected function createComponentNewsMenu()
@@ -85,7 +85,7 @@ use Inteve\Navigation\BreadcrumbsControl;
 class Presenter extends Nette\Application\UI\Form
 {
 	/** @var Navigation @inject */
-	private $navigation;
+	public $navigation;
 
 
 	protected function createComponentBreadcrumbs()

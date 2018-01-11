@@ -72,8 +72,18 @@
 				$pageLevel = substr_count($pageId, '/');
 
 				if (Strings::startsWith($pageId, $subTree) && $subTreeLevel === $pageLevel) {
+					$active = FALSE;
+
+					if ($pageId === '') { // homepage
+						$active = $this->navigation->isPageCurrent($pageId);
+
+					} else {
+						$active = $this->navigation->isPageActive($pageId);
+					}
+
 					$items[] = array(
 						'page' => $page,
+						'active' => $active,
 						'level' => 0,
 					);
 				}

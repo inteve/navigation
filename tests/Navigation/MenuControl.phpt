@@ -69,3 +69,25 @@ test(function () {
 	)), renderControl($presenter['menu']));
 
 });
+
+
+test(function () {
+
+	$navigation = createNavigation();
+	$navigation->setCurrentPage('news/2017');
+
+	$presenter = new MockPresenter;
+	$presenter['menu'] = new MenuControl($navigation);
+
+	Assert::same(implode("\n", array(
+		'',
+		'<div class="menu">',
+		'	<div class="menu__inner">',
+		'		<a href="/" class="menu__item">Homepage</a>',
+		'		<span class="menu__item menu__item--active">News</span>',
+		'	</div>',
+		'</div>',
+		'',
+	)), renderControl($presenter['menu']));
+
+});

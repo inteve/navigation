@@ -65,7 +65,7 @@
 		public function render()
 		{
 			$items = array();
-			$subTree = $this->subTree . '/';
+			$subTree = ltrim($this->subTree . '/', '/');
 			$subTreeLevel = substr_count($subTree, '/');
 
 			foreach ($this->navigation->getPages() as $pageId => $page) {

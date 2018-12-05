@@ -149,6 +149,30 @@
 
 
 		/**
+		 * @param  string
+		 * @return bool
+		 */
+		public function hasChildren($pageId)
+		{
+			$pageId = self::formatPageId($pageId);
+
+			if ($pageId === '') {
+				return TRUE;
+			}
+
+			$pageId .= '/';
+
+			foreach ($this->pages as $childId => $item) {
+				if (Strings::startsWith($childId, $pageId)) {
+					return TRUE;
+				}
+			}
+
+			return FALSE;
+		}
+
+
+		/**
 		 * @param  string|NavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL

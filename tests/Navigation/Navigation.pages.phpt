@@ -90,3 +90,12 @@ test(function () {
 	Assert::true($navigation->isPageCurrent('about'));
 
 });
+
+
+test(function () {
+
+	$navigation = createNavigation();
+	Assert::true($navigation->hasChildren('/'));
+	Assert::false($navigation->hasChildren('about'));
+
+});

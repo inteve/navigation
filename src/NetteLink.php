@@ -15,7 +15,7 @@
 		/**
 		 * @param  string  absolute presenter path or action name or 'this'
 		 */
-		public function __construct($destination, array $parameters = array())
+		public function __construct($destination, array $parameters = [])
 		{
 			if (strpos($destination, ':') !== FALSE) { // Nette link - Presenter:action)
 				$destination = ':' . ltrim($destination, ':');

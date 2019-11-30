@@ -16,14 +16,14 @@ function createNavigation()
 	$navigation->addPage('contact', 'Contact', '/contact/');
 	$navigation->addPage('news', 'News', '/news/');
 	$navigation->addPage('news/2016', 'News 2016', '/news/2016/');
-	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/2016/', array('page' => 1));
-	$navigation->addPage('news/2016/2', 'News 2016 - page 2', '/news/2016/', array('page' => 2));
+	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/2016/', ['page' => 1]);
+	$navigation->addPage('news/2016/2', 'News 2016 - page 2', '/news/2016/', ['page' => 2]);
 	$navigation->addPage('news/2015', 'News 2015', '/news/2015/');
 	$navigation->addPage('news/2014', 'News 2014', '/news/2014/');
 
-	$navigation->addItem('Detail', 'detail', array('show' => TRUE));
+	$navigation->addItem('Detail', 'detail', ['show' => TRUE]);
 
-	$navigation->addItemBefore('news/2016', 'By year', 'news-by-year', array('year' => 2016));
+	$navigation->addItemBefore('news/2016', 'By year', 'news-by-year', ['year' => 2016]);
 	$navigation->addItemBefore('news/2016', 'Listing');
 	$navigation->addItemAfter('news/2016', 'This year', 'this-year');
 	$navigation->addItemAfter('news/2016', 'Edit');
@@ -36,13 +36,13 @@ test(function () {
 
 	$navigation = createNavigation();
 
-	Assert::same(array(
-		array(
+	Assert::same([
+		[
 			'label' => 'Detail',
 			'destination' => 'detail',
-			'parameters' => array('show' => TRUE),
-		),
-	), extractItems($navigation->getBreadcrumbs()));
+			'parameters' => ['show' => TRUE],
+		],
+	], extractItems($navigation->getBreadcrumbs()));
 
 });
 
@@ -52,18 +52,18 @@ test(function () {
 	$navigation = createNavigation();
 	$navigation->setDefaultPage('/');
 
-	Assert::same(array(
-		array(
+	Assert::same([
+		[
 			'label' => 'Homepage',
 			'destination' => '/',
-			'parameters' => array(),
-		),
-		array(
+			'parameters' => [],
+		],
+		[
 			'label' => 'Detail',
 			'destination' => 'detail',
-			'parameters' => array('show' => TRUE),
-		),
-	), extractItems($navigation->getBreadcrumbs()));
+			'parameters' => ['show' => TRUE],
+		],
+	], extractItems($navigation->getBreadcrumbs()));
 
 });
 
@@ -73,53 +73,52 @@ test(function () {
 	$navigation = createNavigation();
 	$navigation->setCurrentPage('news/2016/1');
 
-	Assert::same(array(
-		array(
+	Assert::same([
+		[
 			'label' => 'Homepage',
 			'destination' => '/',
-			'parameters' => array(),
-		),
-		array(
+			'parameters' => [],
+		],
+		[
 			'label' => 'News',
 			'destination' => '/news/',
-			'parameters' => array(),
-		),
-		array(
+			'parameters' => [],
+		],
+		[
 			'label' => 'By year',
 			'destination' => 'news-by-year',
-			'parameters' => array('year' => 2016),
-		),
-		array(
+			'parameters' => ['year' => 2016],
+		],
+		[
 			'label' => 'Listing',
 			'destination' => NULL,
-			'parameters' => array(),
-		),
-		array(
+			'parameters' => [],
+		],
+		[
 			'label' => 'News 2016',
 			'destination' => '/news/2016/',
-			'parameters' => array(),
-		),
-		array(
+			'parameters' => [],
+		],
+		[
 			'label' => 'This year',
 			'destination' => 'this-year',
-			'parameters' => array(),
-		),
-		array(
+			'parameters' => [],
+		],
+		[
 			'label' => 'Edit',
 			'destination' => NULL,
-			'parameters' => array(),
-		),
-		array(
+			'parameters' => [],
+		],
+		[
 			'label' => 'News 2016 - page 1',
 			'destination' => '/news/2016/',
-			'parameters' => array('page' => 1),
-		),
-		array(
+			'parameters' => ['page' => 1],
+		],
+		[
 			'label' => 'Detail',
 			'destination' => 'detail',
-			'parameters' => array('show' => TRUE),
-		),
-	), extractItems($navigation->getBreadcrumbs()));
+			'parameters' => ['show' => TRUE],
+		],
+	], extractItems($navigation->getBreadcrumbs()));
 
 });
-

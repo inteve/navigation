@@ -15,7 +15,7 @@
 		/**
 		 * @param  string
 		 */
-		public function __construct($url, array $parameters = array())
+		public function __construct($url, array $parameters = [])
 		{
 			$this->url = '/' . ltrim($url, '/');
 			$this->parameters = $parameters;

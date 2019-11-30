@@ -47,11 +47,11 @@ test(function () {
 	$navigation = createNavigation();
 	$page = $navigation->getPage('/about/');
 
-	Assert::same(array(
+	Assert::same([
 		'label' => 'About',
 		'destination' => '/about/',
-		'parameters' => array(),
-	), extractItem($page));
+		'parameters' => [],
+	], extractItem($page));
 
 });
 

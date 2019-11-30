@@ -42,30 +42,14 @@ function renderControl(\Nette\Application\UI\Control $control)
 }
 
 
-class LatteFactory implements \Nette\Bridges\ApplicationLatte\ILatteFactory
-{
-	public function create()
-	{
-		return new \Latte\Engine;
+call_user_func(function () {
+	$reflection = new ReflectionClass(\Nette\Bridges\ApplicationLatte\ILatteFactory::class);
+	$methodReflection = $reflection->getMethod('create');
+
+	if (method_exists($methodReflection, 'hasReturnType') && $methodReflection->hasReturnType()) {
+		require __DIR__ . '/Nette3xMocks.php';
+
+	} else {
+		require __DIR__ . '/Nette2xMocks.php';
 	}
-}
-
-
-class MockPresenter extends \Nette\Application\UI\Presenter
-{
-	public function link($destination, $args = array())
-	{
-		if (!is_array($args)) {
-			$args = array_slice(func_get_args(), 1);
-		}
-
-		return '#presenter=' . $destination . '?' . http_build_query($args);
-	}
-
-
-	public function getTemplateFactory()
-	{
-		$latteFactory = new LatteFactory;
-		return new Nette\Bridges\ApplicationLatte\TemplateFactory($latteFactory);
-	}
-}
+});

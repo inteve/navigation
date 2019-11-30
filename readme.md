@@ -17,7 +17,7 @@ Navigation component for Nette Framework.
 composer require inteve/navigation
 ```
 
-`Inteve\Navigation` requires PHP 5.3.0 or later and Nette 2.2+.
+`Inteve\Navigation` requires PHP 5.6.0 or later and Nette 2.2+.
 
 
 ## Usage

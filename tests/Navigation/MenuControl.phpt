@@ -15,11 +15,11 @@ function createNavigation()
 	$navigation->addPage('/', 'Homepage', '/');
 	$navigation->addPage('news', 'News');
 	$navigation->addPage('news/2014', 'News 2014');
-	$navigation->addPage('news/2015', 'News 2015', new UrlLink('/news/', array('year' => 2015)));
-	$navigation->addPage('news/2016', 'News 2016', '/news/', array('year' => 2016));
-	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/', array('year' => 2016, 'page' => 1));
-	$navigation->addPage('news/2017', 'News 2017', 'presenterAction', array('year' => 2017));
-	$navigation->addPage('news/2018', 'News 2018', 'News:default', array('year' => 2018));
+	$navigation->addPage('news/2015', 'News 2015', new UrlLink('/news/', ['year' => 2015]));
+	$navigation->addPage('news/2016', 'News 2016', '/news/', ['year' => 2016]);
+	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/', ['year' => 2016, 'page' => 1]);
+	$navigation->addPage('news/2017', 'News 2017', 'presenterAction', ['year' => 2017]);
+	$navigation->addPage('news/2018', 'News 2018', 'News:default', ['year' => 2018]);
 
 	return $navigation;
 }
@@ -33,7 +33,7 @@ test(function () {
 	$presenter['menu'] = new MenuControl($navigation);
 	$presenter['menu']->setSubTree('news');
 
-	Assert::same(implode("\n", array(
+	Assert::same(implode("\n", [
 		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
@@ -45,7 +45,7 @@ test(function () {
 		'	</div>',
 		'</div>',
 		'',
-	)), renderControl($presenter['menu']));
+	]), renderControl($presenter['menu']));
 
 });
 
@@ -57,7 +57,7 @@ test(function () {
 	$presenter = new MockPresenter;
 	$presenter['menu'] = new MenuControl($navigation);
 
-	Assert::same(implode("\n", array(
+	Assert::same(implode("\n", [
 		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
@@ -66,7 +66,7 @@ test(function () {
 		'	</div>',
 		'</div>',
 		'',
-	)), renderControl($presenter['menu']));
+	]), renderControl($presenter['menu']));
 
 });
 
@@ -79,7 +79,7 @@ test(function () {
 	$presenter = new MockPresenter;
 	$presenter['menu'] = new MenuControl($navigation);
 
-	Assert::same(implode("\n", array(
+	Assert::same(implode("\n", [
 		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
@@ -88,7 +88,7 @@ test(function () {
 		'	</div>',
 		'</div>',
 		'',
-	)), renderControl($presenter['menu']));
+	]), renderControl($presenter['menu']));
 
 });
 
@@ -99,11 +99,11 @@ test(function () {
 
 	$presenter = new MockPresenter;
 	$presenter['menu'] = new MenuControl($navigation);
-	$presenter['menu']->setIgnoredPages(array('/', 'news/'));
+	$presenter['menu']->setIgnoredPages(['/', 'news/']);
 
-	Assert::same(implode("\n", array(
+	Assert::same(implode("\n", [
 		'',
 		'',
-	)), renderControl($presenter['menu']));
+	]), renderControl($presenter['menu']));
 
 });

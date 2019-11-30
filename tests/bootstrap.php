@@ -13,7 +13,7 @@ function test($cb)
 
 function extractItems(array $items)
 {
-	$data = array();
+	$data = [];
 
 	foreach ($items as $item) {
 		$data[] = extractItem($item);
@@ -26,11 +26,11 @@ function extractItems(array $items)
 function extractItem(\Inteve\Navigation\NavigationItem $item)
 {
 	$link = $item->getLink();
-	return array(
+	return [
 		'label' => $item->getLabel(),
 		'destination' => $link !== NULL ? $link->getDestination() : NULL,
-		'parameters' => $link !== NULL ? $link->getParameters() : array(),
-	);
+		'parameters' => $link !== NULL ? $link->getParameters() : [],
+	];
 }
 
 

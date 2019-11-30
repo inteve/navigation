@@ -83,7 +83,7 @@
 				}
 
 			} elseif (is_string($destination)) {
-				$parameters = $parameters !== NULL ? $parameters : array();
+				$parameters = $parameters !== NULL ? $parameters : [];
 
 				if (strpos($destination, '/') !== FALSE) { // detect URL
 					$link = new UrlLink($destination, $parameters);

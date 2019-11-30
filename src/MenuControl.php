@@ -88,7 +88,7 @@
 		 */
 		public function render()
 		{
-			$items = array();
+			$items = [];
 			$subTree = ltrim($this->subTree . '/', '/');
 			$subTreeLevel = substr_count($subTree, '/');
 
@@ -109,11 +109,11 @@
 						$active = $this->navigation->isPageActive($pageId);
 					}
 
-					$items[] = array(
+					$items[] = [
 						'page' => $page,
 						'active' => $active,
 						'level' => 0,
-					);
+					];
 				}
 			}
 

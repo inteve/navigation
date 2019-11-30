@@ -8,16 +8,16 @@
 	class Navigation
 	{
 		/** @var array */
-		private $pages = array();
+		private $pages = [];
 
 		/** @var array */
-		private $items = array();
+		private $items = [];
 
 		/** @var array */
-		private $beforeItems = array();
+		private $beforeItems = [];
 
 		/** @var array */
-		private $afterItems = array();
+		private $afterItems = [];
 
 		/** @var string|NULL */
 		private $currentPage;
@@ -222,7 +222,7 @@
 		public function getBreadcrumbs()
 		{
 			// ziskame aktualni stranku, postupne z jejiho ID urezavame casti, pridavame odpovidajici stranky a itemy
-			$items = array();
+			$items = [];
 			$currentPage = $this->getCurrentPage();
 
 			if (isset($currentPage)) {

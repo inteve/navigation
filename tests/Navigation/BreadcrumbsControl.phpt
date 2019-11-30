@@ -14,7 +14,7 @@ function createNavigation()
 	$navigation->addPage('/', 'Homepage', 'Homepage:default');
 	$navigation->addPage('news', 'News');
 	$navigation->addPage('news/2016', 'News 2016', '/news/2016/');
-	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/2016/', array('page' => 1));
+	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/2016/', ['page' => 1]);
 
 	return $navigation;
 }
@@ -28,7 +28,7 @@ test(function () {
 	$presenter = new MockPresenter;
 	$presenter['breadcrumbs'] = new BreadcrumbsControl($navigation);
 
-	Assert::same(implode("\n", array(
+	Assert::same(implode("\n", [
 		'',
 		'<div class="breadcrumbs">',
 		'	<div class="breadcrumbs__inner">',
@@ -50,6 +50,6 @@ test(function () {
 		'	</div>',
 		'</div>',
 		'',
-	)), renderControl($presenter['breadcrumbs']));
+	]), renderControl($presenter['breadcrumbs']));
 
 });

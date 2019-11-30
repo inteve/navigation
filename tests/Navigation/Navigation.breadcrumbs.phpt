@@ -10,7 +10,7 @@ require __DIR__ . '/../bootstrap.php';
 function createNavigation()
 {
 	$navigation = new Navigation;
-	$homepage = new NavigationItem('Homepage', '/');
+	$homepage = NavigationItem::create('Homepage', '/');
 	$navigation->addPage('/', $homepage);
 	$navigation->addPage('about', 'About', '/about/');
 	$navigation->addPage('contact', 'Contact', '/contact/');

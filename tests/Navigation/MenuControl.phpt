@@ -3,7 +3,7 @@
 use Inteve\Navigation\MenuControl;
 use Inteve\Navigation\Navigation;
 use Inteve\Navigation\NavigationItem;
-use Inteve\Navigation\Url;
+use Inteve\Navigation\UrlLink;
 use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
@@ -15,7 +15,7 @@ function createNavigation()
 	$navigation->addPage('/', 'Homepage', '/');
 	$navigation->addPage('news', 'News');
 	$navigation->addPage('news/2014', 'News 2014');
-	$navigation->addPage('news/2015', 'News 2015', new Url('/news/'), array('year' => 2015));
+	$navigation->addPage('news/2015', 'News 2015', new UrlLink('/news/', array('year' => 2015)));
 	$navigation->addPage('news/2016', 'News 2016', '/news/', array('year' => 2016));
 	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/', array('year' => 2016, 'page' => 1));
 	$navigation->addPage('news/2017', 'News 2017', 'presenterAction', array('year' => 2017));

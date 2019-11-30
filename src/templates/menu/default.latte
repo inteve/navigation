@@ -3,9 +3,8 @@
 	<div class="menu__inner">
 	{foreach $items as $item}
 		{var $page = $item[page]}
-		{var $url = $control->getItemUrl($page, $basePath)}
-		<a n:if="$url !== NULL" href="{$url}" n:class="menu__item, $item[active] ? 'menu__item--active'">{$page->getLabel()}</a>
-		<span n:if="$url === NULL" n:class="menu__item, $item[active] ? 'menu__item--active'">{$page->getLabel()}</span>
+		<a n:if="$page->hasLink()" href="{$linkGenerator->getUrl($page->getLink())}" n:class="menu__item, $item[active] ? 'menu__item--active'">{$page->getLabel()}</a>
+		<span n:if="!$page->hasLink()" n:class="menu__item, $item[active] ? 'menu__item--active'">{$page->getLabel()}</span>
 	{/foreach}
 	</div>
 </div>

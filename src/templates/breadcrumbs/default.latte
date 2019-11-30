@@ -5,9 +5,8 @@
 		<span class="breadcrumbs__separator">/</span>
 
 		{if !$iterator->last}
-			{var $url = $control->getItemUrl($item, $basePath)}
-			<a n:if="$url !== NULL" href="{$url}" class="breadcrumbs__item">{$item->getLabel()}</a>
-			<span n:if="$url === NULL" class="breadcrumbs__item">{$item->getLabel()}</span>
+			<a n:if="$item->hasLink()" href="{$linkGenerator->getUrl($item->getLink())}" class="breadcrumbs__item">{$item->getLabel()}</a>
+			<span n:if="!$item->hasLink()" class="breadcrumbs__item">{$item->getLabel()}</span>
 
 		{else}
 			<span class="breadcrumbs__item breadcrumbs__item--active">{$item->getLabel()}</span>

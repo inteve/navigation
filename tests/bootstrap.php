@@ -25,11 +25,11 @@ function extractItems(array $items)
 
 function extractItem(\Inteve\Navigation\NavigationItem $item)
 {
-	$destination = $item->getDestination();
+	$link = $item->getLink();
 	return array(
 		'label' => $item->getLabel(),
-		'destination' => $destination instanceof \Inteve\Navigation\Url ? $destination->getUrl() : $destination,
-		'parameters' => $item->getParameters(),
+		'destination' => $link !== NULL ? $link->getDestination() : NULL,
+		'parameters' => $link !== NULL ? $link->getParameters() : array(),
 	);
 }
 

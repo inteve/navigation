@@ -119,6 +119,7 @@
 
 			$template = $this->createTemplate();
 			$template->items = $items;
+			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
 			$template->render($this->templateFile);
 		}
 	}

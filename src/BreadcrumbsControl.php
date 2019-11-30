@@ -42,6 +42,7 @@
 		{
 			$template = $this->createTemplate();
 			$template->items = $this->navigation->getBreadcrumbs();
+			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
 			$template->render($this->templateFile);
 		}
 	}

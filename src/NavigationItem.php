@@ -8,23 +8,17 @@
 		/** @var string */
 		private $label;
 
-		/** @var string|Url|NULL */
-		private $destination;
-
-		/** @var array */
-		private $parameters;
+		/** @var ILink|NULL */
+		private $link;
 
 
 		/**
 		 * @param  string
-		 * @param  string|Url|NULL
-		 * @param  array|NULL
 		 */
-		public function __construct($label, $destination = NULL, array $parameters = NULL)
+		public function __construct($label, ILink $link = NULL)
 		{
 			$this->label = $label;
-			$this->destination = $this->detectDestination($destination);
-			$this->parameters = $parameters !== NULL ? $parameters : array();
+			$this->link = $link;
 		}
 
 
@@ -49,45 +43,59 @@
 
 
 		/**
-		 * @return string|NULL
+		 * @return ILink|NULL
 		 */
-		public function getDestination()
+		public function getLink()
 		{
-			return $this->destination;
+			return $this->link;
 		}
 
 
 		/**
-		 * @return array
+		 * @return bool
 		 */
-		public function getParameters()
+		public function hasLink()
 		{
-			return $this->parameters;
+			return $this->link !== NULL;
 		}
 
 
 		/**
-		 * @param  string|NULL|Url
-		 * @return string|NULL|Url
+		 * @param  string
+		 * @param  string|ILink|NULL
+		 * @param  array|NULL
+		 * @return static
 		 */
-		protected function detectDestination($destination)
+		public static function create($label, $destination = NULL, array $parameters = NULL)
 		{
+			$link = NULL;
+
 			if ($destination === NULL) {
-				return NULL;
+				if ($parameters !== NULL) {
+					throw new InvalidArgumentException('Destination is empty, passing of $parameters has no effect.');
+				}
+
+			} elseif ($destination instanceof ILink) {
+				$link = $destination;
+
+				if ($parameters !== NULL) {
+					throw new InvalidArgumentException('Destination is already instance of ' . ILink::class . ', passing of $parameters has no effect.');
+				}
+
+			} elseif (is_string($destination)) {
+				$parameters = $parameters !== NULL ? $parameters : array();
+
+				if (strpos($destination, '/') !== FALSE) { // detect URL
+					$link = new UrlLink($destination, $parameters);
+
+				} else { // Nette link - Presenter:action or action name or 'this'
+					$link = new NetteLink($destination, $parameters);
+				}
+
+			} else {
+				throw new InvalidArgumentException('Destination must be ' . ILink::class . ', string or NULL.');
 			}
 
-			if ($destination instanceof Url) {
-				return $destination;
-			}
-
-			if (strpos($destination, '/') !== FALSE) { // detect URL
-				return new Url($destination);
-			}
-
-			if (strpos($destination, ':') !== FALSE) { // Nette link - Presenter:action
-				$destination = ':' . ltrim($destination, ':');
-			} // else -> this or action name
-
-			return $destination;
+			return new static($label, $link);
 		}
 	}

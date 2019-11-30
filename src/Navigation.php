@@ -276,7 +276,7 @@
 				return $label;
 
 			} else {
-				return new NavigationItem($label, $link, $parameters);
+				return NavigationItem::create($label, $link, $parameters);
 			}
 		}
 

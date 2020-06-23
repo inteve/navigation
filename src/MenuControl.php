@@ -90,16 +90,14 @@
 		{
 			$items = [];
 			$subTree = ltrim($this->subTree . '/', '/');
-			$subTreeLevel = substr_count($subTree, '/');
+			$subTreeLevel = Helpers::getPageLevel($subTree);
 
 			foreach ($this->navigation->getPages() as $pageId => $page) {
 				if (isset($this->ignoredPages[$pageId])) {
 					continue;
 				}
 
-				$pageLevel = substr_count($pageId, '/');
-
-				if (Strings::startsWith($pageId, $subTree) && $subTreeLevel === $pageLevel) {
+				if (Strings::startsWith($pageId, $subTree) && $subTreeLevel === $page->getLevel()) {
 					$active = FALSE;
 
 					if ($pageId === '') { // homepage

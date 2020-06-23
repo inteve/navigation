@@ -19,4 +19,14 @@
 		{
 			return trim($pageId, '/');
 		}
+
+
+		/**
+		 * @param  string
+		 * @return int
+		 */
+		public static function getPageLevel($pageId)
+		{
+			return substr_count($pageId, '/');
+		}
 	}

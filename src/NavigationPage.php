@@ -75,6 +75,15 @@
 
 
 		/**
+		 * @return int
+		 */
+		public function getLevel()
+		{
+			return Helpers::getPageLevel($this->id);
+		}
+
+
+		/**
 		 * @param  string
 		 * @param  string
 		 * @param  string|ILink|NULL

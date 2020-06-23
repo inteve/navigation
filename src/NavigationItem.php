@@ -64,10 +64,10 @@
 		 * @param  string
 		 * @param  string|ILink|NULL
 		 * @param  array|NULL
-		 * @return static
+		 * @return self
 		 */
 		public static function create($label, $destination = NULL, array $parameters = NULL)
 		{
-			return new static($label, LinkFactory::create($destination, $parameters));
+			return new self($label, LinkFactory::create($destination, $parameters));
 		}
 	}

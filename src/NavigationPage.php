@@ -88,10 +88,10 @@
 		 * @param  string
 		 * @param  string|ILink|NULL
 		 * @param  array|NULL
-		 * @return static
+		 * @return self
 		 */
 		public static function create($id, $label, $destination = NULL, array $parameters = NULL)
 		{
-			return new static($id, $label, LinkFactory::create($destination, $parameters));
+			return new self($id, $label, LinkFactory::create($destination, $parameters));
 		}
 	}

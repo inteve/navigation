@@ -78,6 +78,12 @@ class NewsPresenter extends Nette\Application\UI\Form
 }
 ```
 
+In Latte template:
+
+```latte
+{control newsMenu}
+```
+
 
 ### Render breadcrumbs
 
@@ -98,6 +104,12 @@ class Presenter extends Nette\Application\UI\Form
 		return new BreadcrumbsControl($this->navigation);
 	}
 }
+```
+
+In Latte template:
+
+```latte
+{control breadcrumbs}
 ```
 
 ------------------------------

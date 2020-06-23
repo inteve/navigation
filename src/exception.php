@@ -26,3 +26,9 @@
 	class NotImplementedException extends NavigationException
 	{
 	}
+
+
+
+	class StaticClassException extends NavigationException
+	{
+	}

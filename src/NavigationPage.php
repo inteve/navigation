@@ -95,6 +95,16 @@
 
 		/**
 		 * @param  string
+		 * @return bool
+		 */
+		public function isChildOf($pageId)
+		{
+			return $this->isDescendantOf($pageId) && $this->getLevel() === Helpers::getPageLevel(ltrim($pageId . '/', '/'));
+		}
+
+
+		/**
+		 * @param  string
 		 * @param  string
 		 * @param  string|ILink|NULL
 		 * @param  array|NULL

@@ -89,15 +89,13 @@
 		public function render()
 		{
 			$items = [];
-			$subTree = ltrim($this->subTree . '/', '/');
-			$subTreeLevel = Helpers::getPageLevel($subTree);
 
 			foreach ($this->navigation->getPages() as $pageId => $page) {
 				if (isset($this->ignoredPages[$pageId])) {
 					continue;
 				}
 
-				if (Strings::startsWith($pageId, $subTree) && $subTreeLevel === $page->getLevel()) {
+				if ($page->isChildOf($this->subTree)) {
 					$active = FALSE;
 
 					if ($pageId === '') { // homepage

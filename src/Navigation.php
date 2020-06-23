@@ -84,7 +84,7 @@
 				return TRUE;
 			}
 
-			return Strings::startsWith($currentPage, "$page/");
+			return Helpers::isUnderPath($currentPage, $page);
 		}
 
 
@@ -164,10 +164,8 @@
 				return TRUE;
 			}
 
-			$pageId .= '/';
-
-			foreach ($this->pages as $childId => $item) {
-				if (Strings::startsWith($childId, $pageId)) {
+			foreach ($this->pages as $childId => $page) {
+				if ($page->isDescendantOf($pageId)) {
 					return TRUE;
 				}
 			}

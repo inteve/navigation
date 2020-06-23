@@ -2,6 +2,8 @@
 
 	namespace Inteve\Navigation;
 
+	use Nette\Utils\Strings;
+
 
 	class Helpers
 	{
@@ -28,5 +30,23 @@
 		public static function getPageLevel($pageId)
 		{
 			return substr_count($pageId, '/');
+		}
+
+
+		/**
+		 * @param  string
+		 * @param  string
+		 * @return bool
+		 */
+		public static function isUnderPath($child, $parent)
+		{
+			$child = self::normalizePageId($child);
+			$parent = self::normalizePageId($parent) . '/';
+
+			if ($parent === '/') {
+				return TRUE;
+			}
+
+			return Strings::startsWith($child, $parent);
 		}
 	}

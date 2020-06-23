@@ -85,6 +85,16 @@
 
 		/**
 		 * @param  string
+		 * @return bool
+		 */
+		public function isDescendantOf($pageId)
+		{
+			return Helpers::isUnderPath($this->id, $pageId);
+		}
+
+
+		/**
+		 * @param  string
 		 * @param  string
 		 * @param  string|ILink|NULL
 		 * @param  array|NULL

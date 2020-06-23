@@ -104,6 +104,15 @@
 
 
 		/**
+		 * @return bool
+		 */
+		public function isHomepage()
+		{
+			return $this->id === '';
+		}
+
+
+		/**
 		 * @param  string
 		 * @param  string
 		 * @param  string|ILink|NULL

@@ -98,7 +98,7 @@
 				if ($page->isChildOf($this->subTree)) {
 					$active = FALSE;
 
-					if ($pageId === '') { // homepage
+					if ($page->isHomepage()) {
 						$active = $this->navigation->isPageCurrent($pageId);
 
 					} else {

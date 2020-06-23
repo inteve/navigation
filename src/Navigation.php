@@ -27,23 +27,23 @@
 
 
 		/**
-		 * @param  string|NULL
+		 * @param  string|NavigationPage|NULL
 		 * @return self
 		 */
 		public function setDefaultPage($defaultPage)
 		{
-			$this->defaultPage = $defaultPage !== NULL ? Helpers::normalizePageId($defaultPage) : NULL;
+			$this->defaultPage = $defaultPage !== NULL ? Helpers::extractPageId($defaultPage) : NULL;
 			return $this;
 		}
 
 
 		/**
-		 * @param  string|NULL
+		 * @param  string|NavigationPage|NULL
 		 * @return self
 		 */
 		public function setCurrentPage($currentPage)
 		{
-			$this->currentPage = $currentPage !== NULL ? Helpers::normalizePageId($currentPage) : NULL;
+			$this->currentPage = $currentPage !== NULL ? Helpers::extractPageId($currentPage) : NULL;
 			return $this;
 		}
 
@@ -58,22 +58,22 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string|NavigationPage
 		 * @return bool
 		 */
 		public function isPageCurrent($page)
 		{
-			return Helpers::normalizePageId($page) === $this->getCurrentPage();
+			return Helpers::extractPageId($page) === $this->getCurrentPage();
 		}
 
 
 		/**
-		 * @param  string
+		 * @param  string|NavigationPage
 		 * @return bool
 		 */
 		public function isPageActive($page)
 		{
-			$page = Helpers::normalizePageId($page);
+			$page = Helpers::extractPageId($page);
 			$currentPage = $this->getCurrentPage();
 
 			if ($currentPage === NULL) {
@@ -153,12 +153,12 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string|NavigationPage
 		 * @return bool
 		 */
 		public function hasChildren($pageId)
 		{
-			$pageId = Helpers::normalizePageId($pageId);
+			$pageId = Helpers::extractPageId($pageId);
 
 			if ($pageId === '') {
 				return TRUE;
@@ -188,7 +188,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string|NavigationPage
 		 * @param  string|INavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL
@@ -196,14 +196,14 @@
 		 */
 		public function addItemBefore($pageId, $label, $link = NULL, array $parameters = NULL)
 		{
-			$pageId = Helpers::normalizePageId($pageId);
+			$pageId = Helpers::extractPageId($pageId);
 			$this->beforeItems[$pageId][] = $this->createItem($label, $link, $parameters);
 			return $this;
 		}
 
 
 		/**
-		 * @param  string
+		 * @param  string|NavigationPage
 		 * @param  string|INavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL
@@ -211,7 +211,7 @@
 		 */
 		public function addItemAfter($pageId, $label, $link = NULL, array $parameters = NULL)
 		{
-			$pageId = Helpers::normalizePageId($pageId);
+			$pageId = Helpers::extractPageId($pageId);
 			$this->afterItems[$pageId][] = $this->createItem($label, $link, $parameters);
 			return $this;
 		}

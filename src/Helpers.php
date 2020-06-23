@@ -24,6 +24,20 @@
 
 
 		/**
+		 * @param  string|NavigationPage
+		 * @return string
+		 */
+		public static function extractPageId($pageId)
+		{
+			if ($pageId instanceof NavigationPage) {
+				return $pageId->getId();
+			}
+
+			return self::normalizePageId($pageId);
+		}
+
+
+		/**
 		 * @param  string
 		 * @return int
 		 */

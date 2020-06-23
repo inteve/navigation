@@ -7,16 +7,16 @@
 
 	class Navigation
 	{
-		/** @var array */
+		/** @var array<string, NavigationItem> */
 		private $pages = [];
 
-		/** @var array */
+		/** @var NavigationItem[] */
 		private $items = [];
 
-		/** @var array */
+		/** @var array<string, NavigationItem[]> */
 		private $beforeItems = [];
 
-		/** @var array */
+		/** @var array<string, NavigationItem[]> */
 		private $afterItems = [];
 
 		/** @var string|NULL */
@@ -140,7 +140,7 @@
 
 
 		/**
-		 * @return NavigationItem[]  [pageId => NavigationItem]
+		 * @return array<string, NavigationItem>  [pageId => NavigationItem]
 		 */
 		public function getPages()
 		{
@@ -217,7 +217,7 @@
 
 		/**
 		 * Returns breadcrumbs for current page.
-		 * @return array
+		 * @return NavigationItem[]
 		 */
 		public function getBreadcrumbs()
 		{

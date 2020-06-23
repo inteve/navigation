@@ -23,7 +23,7 @@ function extractItems(array $items)
 }
 
 
-function extractItem(\Inteve\Navigation\NavigationItem $item)
+function extractItem(\Inteve\Navigation\INavigationItem $item)
 {
 	$link = $item->getLink();
 	return [

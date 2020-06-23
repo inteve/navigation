@@ -7,16 +7,16 @@
 
 	class Navigation
 	{
-		/** @var array<string, NavigationItem> */
+		/** @var array<string, NavigationPage> */
 		private $pages = [];
 
-		/** @var NavigationItem[] */
+		/** @var INavigationItem[] */
 		private $items = [];
 
-		/** @var array<string, NavigationItem[]> */
+		/** @var array<string, INavigationItem[]> */
 		private $beforeItems = [];
 
-		/** @var array<string, NavigationItem[]> */
+		/** @var array<string, INavigationItem[]> */
 		private $afterItems = [];
 
 		/** @var string|NULL */
@@ -90,7 +90,7 @@
 
 		/**
 		 * @param  string
-		 * @param  string|NavigationItem
+		 * @param  string|NavigationPage|INavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL
 		 * @return self
@@ -98,14 +98,17 @@
 		 */
 		public function addPage($id, $label, $link = NULL, array $parameters = NULL)
 		{
-			$id = Helpers::normalizePageId($id);
+			$page = NULL;
 
-			if (isset($this->pages[$id])) {
-				throw new DuplicateException("Page '$id' already exists.");
+			if ($label instanceof INavigationItem) {
+				$item = $label;
+				$page = NavigationPage::create($id, $item->getLabel(), $item->getLink());
+
+			} else {
+				$page = NavigationPage::create($id, $label, $link, $parameters);
 			}
 
-
-			$this->pages[$id] = $this->createItem($label, $link, $parameters);
+			$this->addToPages($page);
 			return $this;
 		}
 
@@ -125,7 +128,7 @@
 
 		/**
 		 * @param  string
-		 * @return NavigationItem
+		 * @return NavigationPage
 		 * @throws MissingException
 		 */
 		public function getPage($pageId)
@@ -141,7 +144,7 @@
 
 
 		/**
-		 * @return array<string, NavigationItem>  [pageId => NavigationItem]
+		 * @return array<string, NavigationPage>  [pageId => NavigationPage]
 		 */
 		public function getPages()
 		{
@@ -174,7 +177,7 @@
 
 
 		/**
-		 * @param  string|NavigationItem
+		 * @param  string|INavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL
 		 * @return self
@@ -188,7 +191,7 @@
 
 		/**
 		 * @param  string
-		 * @param  string|NavigationItem
+		 * @param  string|INavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL
 		 * @return self
@@ -203,7 +206,7 @@
 
 		/**
 		 * @param  string
-		 * @param  string|NavigationItem
+		 * @param  string|INavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL
 		 * @return self
@@ -218,7 +221,7 @@
 
 		/**
 		 * Returns breadcrumbs for current page.
-		 * @return NavigationItem[]
+		 * @return INavigationItem[]
 		 */
 		public function getBreadcrumbs()
 		{
@@ -266,14 +269,29 @@
 
 
 		/**
-		 * @param  string|NavigationItem
+		 * @return void
+		 */
+		private function addToPages(NavigationPage $page)
+		{
+			$id = $page->getId();
+
+			if (isset($this->pages[$id])) {
+				throw new DuplicateException("Page '$id' already exists.");
+			}
+
+			$this->pages[$id] = $page;
+		}
+
+
+		/**
+		 * @param  string|INavigationItem
 		 * @param  string|NULL
 		 * @param  string|NULL
-		 * @return NavigationItem
+		 * @return INavigationItem
 		 */
 		private function createItem($label, $link = NULL, array $parameters = NULL)
 		{
-			if ($label instanceof NavigationItem) {
+			if ($label instanceof INavigationItem) {
 				return $label;
 
 			} else {

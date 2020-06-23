@@ -3,8 +3,11 @@
 	namespace Inteve\Navigation;
 
 
-	class NavigationItem implements INavigationItem
+	class NavigationPage implements INavigationItem
 	{
+		/** @var string */
+		private $id;
+
 		/** @var string */
 		private $label;
 
@@ -14,11 +17,22 @@
 
 		/**
 		 * @param  string
+		 * @param  string
 		 */
-		public function __construct($label, ILink $link = NULL)
+		public function __construct($id, $label, ILink $link = NULL)
 		{
+			$this->id = Helpers::normalizePageId($id);
 			$this->label = $label;
 			$this->link = $link;
+		}
+
+
+		/**
+		 * @return string
+		 */
+		public function getId()
+		{
+			return $this->id;
 		}
 
 
@@ -62,12 +76,13 @@
 
 		/**
 		 * @param  string
+		 * @param  string
 		 * @param  string|ILink|NULL
 		 * @param  array|NULL
 		 * @return static
 		 */
-		public static function create($label, $destination = NULL, array $parameters = NULL)
+		public static function create($id, $label, $destination = NULL, array $parameters = NULL)
 		{
-			return new static($label, LinkFactory::create($destination, $parameters));
+			return new static($id, $label, LinkFactory::create($destination, $parameters));
 		}
 	}

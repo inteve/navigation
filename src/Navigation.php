@@ -32,7 +32,7 @@
 		 */
 		public function setDefaultPage($defaultPage)
 		{
-			$this->defaultPage = $defaultPage !== NULL ? self::formatPageId($defaultPage) : NULL;
+			$this->defaultPage = $defaultPage !== NULL ? Helpers::normalizePageId($defaultPage) : NULL;
 			return $this;
 		}
 
@@ -43,7 +43,7 @@
 		 */
 		public function setCurrentPage($currentPage)
 		{
-			$this->currentPage = $currentPage !== NULL ? self::formatPageId($currentPage) : NULL;
+			$this->currentPage = $currentPage !== NULL ? Helpers::normalizePageId($currentPage) : NULL;
 			return $this;
 		}
 
@@ -63,7 +63,7 @@
 		 */
 		public function isPageCurrent($page)
 		{
-			return self::formatPageId($page) === $this->getCurrentPage();
+			return Helpers::normalizePageId($page) === $this->getCurrentPage();
 		}
 
 
@@ -73,7 +73,7 @@
 		 */
 		public function isPageActive($page)
 		{
-			$page = self::formatPageId($page);
+			$page = Helpers::normalizePageId($page);
 			$currentPage = $this->getCurrentPage();
 
 			if ($currentPage === NULL) {
@@ -98,11 +98,12 @@
 		 */
 		public function addPage($id, $label, $link = NULL, array $parameters = NULL)
 		{
-			$id = self::formatPageId($id);
+			$id = Helpers::normalizePageId($id);
 
 			if (isset($this->pages[$id])) {
 				throw new DuplicateException("Page '$id' already exists.");
 			}
+
 
 			$this->pages[$id] = $this->createItem($label, $link, $parameters);
 			return $this;
@@ -129,7 +130,7 @@
 		 */
 		public function getPage($pageId)
 		{
-			$pageId = self::formatPageId($pageId);
+			$pageId = Helpers::normalizePageId($pageId);
 
 			if (!isset($this->pages[$pageId])) {
 				throw new MissingException("Page '$pageId' not found.");
@@ -154,7 +155,7 @@
 		 */
 		public function hasChildren($pageId)
 		{
-			$pageId = self::formatPageId($pageId);
+			$pageId = Helpers::normalizePageId($pageId);
 
 			if ($pageId === '') {
 				return TRUE;
@@ -194,7 +195,7 @@
 		 */
 		public function addItemBefore($pageId, $label, $link = NULL, array $parameters = NULL)
 		{
-			$pageId = self::formatPageId($pageId);
+			$pageId = Helpers::normalizePageId($pageId);
 			$this->beforeItems[$pageId][] = $this->createItem($label, $link, $parameters);
 			return $this;
 		}
@@ -209,7 +210,7 @@
 		 */
 		public function addItemAfter($pageId, $label, $link = NULL, array $parameters = NULL)
 		{
-			$pageId = self::formatPageId($pageId);
+			$pageId = Helpers::normalizePageId($pageId);
 			$this->afterItems[$pageId][] = $this->createItem($label, $link, $parameters);
 			return $this;
 		}
@@ -278,15 +279,5 @@
 			} else {
 				return NavigationItem::create($label, $link, $parameters);
 			}
-		}
-
-
-		/**
-		 * @param  string
-		 * @return string
-		 */
-		public static function formatPageId($pageId)
-		{
-			return trim($pageId, '/');
 		}
 	}

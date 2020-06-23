@@ -57,7 +57,7 @@
 		 */
 		public function setSubTree($subTree)
 		{
-			$this->subTree = Navigation::formatPageId($subTree);
+			$this->subTree = Helpers::normalizePageId($subTree);
 			return $this;
 		}
 
@@ -75,7 +75,7 @@
 			$navigation = $this->navigation;
 
 			foreach ($ignoredPages as $ignoredPage) {
-				$ignoredPage = $navigation::formatPageId($ignoredPage);
+				$ignoredPage = Helpers::normalizePageId($ignoredPage);
 				$this->ignoredPages[$ignoredPage] = TRUE;
 			}
 

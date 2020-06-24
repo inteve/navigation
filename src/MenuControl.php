@@ -156,6 +156,10 @@
 
 			$requiredLevel = Helpers::getPageLevel($subTree) + $this->subLevel;
 
+			if ($subTree !== '') {
+				$requiredLevel++;
+			}
+
 			while (Helpers::getPageLevel($currentPage) >= $requiredLevel) {
 				$currentPage = Helpers::getParent($currentPage);
 

@@ -6,7 +6,7 @@
 Navigation component for Nette Framework.
 
 <a href="https://www.patreon.com/bePatron?u=9680759"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron!" height="35"></a>
-<a href="https://www.paypal.me/janpecha/1eur"><img src="https://buymecoffee.intm.org/img/button-paypal-white.png" alt="Buy me a coffee" height="35"></a>
+<a href="https://www.paypal.me/janpecha/5eur"><img src="https://buymecoffee.intm.org/img/button-paypal-white.png" alt="Buy me a coffee" height="35"></a>
 
 
 ## Installation
@@ -17,7 +17,7 @@ Navigation component for Nette Framework.
 composer require inteve/navigation
 ```
 
-`Inteve\Navigation` requires PHP 5.6.0 or later and Nette 2.2+.
+`Inteve\Navigation` requires PHP 5.6.0 or later and Nette 2.2+ or 3.0+.
 
 
 ## Usage
@@ -73,6 +73,18 @@ class NewsPresenter extends Nette\Application\UI\Form
 		// render items 'News 2016' & 'News 2015'
 		$menu = new MenuControl($this->navigation);
 		$menu->setSubTree('news');
+		return $menu;
+	}
+
+
+	protected function createComponentSubMenu()
+	{
+		// Renders submenu by current page
+		// for setCurrentPage('news') or setCurrentPage('news/any/thing') it renders items 'news/2016' & 'news/2015'
+		// for setCurrentPage('contact') it renders nothing
+		$menu = new MenuControl($this->navigation);
+		$menu->setSubTree('/');
+		$menu->setSubLevel(1);
 		return $menu;
 	}
 }

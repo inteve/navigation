@@ -15,6 +15,9 @@
 		/** @var string|NULL */
 		private $subTree;
 
+		/** @var int|NULL */
+		private $subLevel;
+
 		/** @var string */
 		private $templateFile;
 
@@ -63,6 +66,16 @@
 
 
 		/**
+		 * @param  int|NULL
+		 */
+		public function setSubLevel($subLevel)
+		{
+			$this->subLevel = $subLevel > 0 ? $subLevel : NULL;
+			return $this;
+		}
+
+
+		/**
 		 * @param  string[]|NULL
 		 */
 		public function setIgnoredPages(array $ignoredPages = NULL)
@@ -89,13 +102,18 @@
 		public function render()
 		{
 			$items = [];
+			$subTree = $this->findSubTree();
+
+			if ($subTree === NULL) { // no subtree => no items
+				return;
+			}
 
 			foreach ($this->navigation->getPages() as $pageId => $page) {
 				if (isset($this->ignoredPages[$pageId])) {
 					continue;
 				}
 
-				if ($page->isChildOf($this->subTree)) {
+				if ($page->isChildOf($subTree)) {
 					$active = FALSE;
 
 					if ($page->isHomepage()) {
@@ -117,5 +135,35 @@
 			$template->items = $items;
 			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
 			$template->render($this->templateFile);
+		}
+
+
+		/**
+		 * @return string|NULL
+		 */
+		private function findSubTree()
+		{
+			if ($this->subLevel === NULL) {
+				return (string) $this->subTree;
+			}
+
+			$subTree = (string) $this->subTree;
+			$currentPage = $this->navigation->getCurrentPage();
+
+			if (!Helpers::isUnderPath($currentPage, $subTree)) {
+				return NULL;
+			}
+
+			$requiredLevel = Helpers::getPageLevel($subTree) + $this->subLevel;
+
+			while (Helpers::getPageLevel($currentPage) >= $requiredLevel) {
+				$currentPage = Helpers::getParent($currentPage);
+
+				if ($currentPage === '') {
+					break;
+				}
+			}
+
+			return $currentPage;
 		}
 	}

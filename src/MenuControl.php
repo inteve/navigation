@@ -8,6 +8,8 @@
 	class MenuControl extends BaseControl
 	{
 		const TEMPLATE_DEFAULT = 'default';
+		const TEMPLATE_BOOTSTRAP2 = 'bootstrap2';
+		const TEMPLATE_BOOTSTRAP2_TABS = 'bootstrap2-tabs';
 
 		/** @var Navigation */
 		private $navigation;
@@ -38,7 +40,9 @@
 		 */
 		public function setTemplateFile($file)
 		{
-			if ($file === self::TEMPLATE_DEFAULT) {
+			if ($file === self::TEMPLATE_DEFAULT
+				|| $file === self::TEMPLATE_BOOTSTRAP2
+				|| $file === self::TEMPLATE_BOOTSTRAP2_TABS) {
 				$file = __DIR__ . '/templates/menu/' . $file . '.latte';
 			}
 			$this->templateFile = $file;

@@ -1,0 +1,7 @@
+<ul class="nav" n:if="!empty($items)">
+	<li n:foreach="$items as $item" n:class="$item[active] ? active">
+		{var $page = $item[page]}
+		<a n:if="$page->hasLink()" href="{$linkGenerator->getUrl($page->getLink())}">{$page->getLabel()}</a>
+		<span n:if="!$page->hasLink()">{$page->getLabel()}</span>
+	</li>
+</ul>

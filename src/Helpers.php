@@ -63,4 +63,24 @@
 
 			return Strings::startsWith($child, $parent);
 		}
+
+
+		/**
+		 * @param  string
+		 * @return string|NULL
+		 */
+		public static function getParent($pageId)
+		{
+			$pageId = self::normalizePageId($pageId);
+
+			if ($pageId === '') {
+				return NULL;
+			}
+
+			if (($pos = strrpos($pageId, '/')) !== FALSE) {
+				return substr($pageId, 0, $pos);
+			}
+
+			return '';
+		}
 	}

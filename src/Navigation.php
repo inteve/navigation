@@ -243,17 +243,12 @@
 
 					// urizneme cast
 					if ($currentPage === '') {
-						break; // currentPage = FALSE
+						break; // currentPage = NULL
 					}
 
-					if (($pos = strrpos($currentPage, '/')) !== FALSE) {
-						$currentPage = substr($currentPage, 0, $pos);
+					$currentPage = Helpers::getParent($currentPage);
 
-					} else {
-						$currentPage = '';
-					}
-
-				} while ($currentPage !== FALSE);
+				} while ($currentPage !== NULL);
 
 				$items = array_reverse($items);
 			}

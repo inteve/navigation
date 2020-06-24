@@ -122,3 +122,18 @@ test(function () {
 	Assert::same('', renderControl($presenter['menu']));
 
 });
+
+
+test(function () {
+
+	$navigation = createNavigation();
+	$navigation->setCurrentPage('/');
+
+	$presenter = new MockPresenter;
+	$presenter['menu'] = new MenuControl($navigation);
+	$presenter['menu']->setSubTree('/');
+	$presenter['menu']->setSubLevel(1);
+
+	Assert::same('', renderControl($presenter['menu']));
+
+});

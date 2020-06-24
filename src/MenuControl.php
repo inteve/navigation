@@ -148,9 +148,9 @@
 			}
 
 			$subTree = (string) $this->subTree;
-			$currentPage = $this->navigation->getCurrentPage();
+			$currentPage = (string) $this->navigation->getCurrentPage();
 
-			if (!Helpers::isUnderPath($currentPage, $subTree)) {
+			if ($currentPage === '' || !Helpers::isUnderPath($currentPage, $subTree)) {
 				return NULL;
 			}
 

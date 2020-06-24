@@ -53,7 +53,7 @@
 		 */
 		public function getCurrentPage()
 		{
-			return isset($this->currentPage) ? $this->currentPage : $this->defaultPage;
+			return $this->currentPage !== NULL ? $this->currentPage : $this->defaultPage;
 		}
 
 
@@ -227,7 +227,7 @@
 			$items = [];
 			$currentPage = $this->getCurrentPage();
 
-			if (isset($currentPage)) {
+			if ($currentPage !== NULL) {
 				do {
 					if (isset($this->pages[$currentPage])) { // pokud stranka existuje
 						if (isset($this->afterItems[$currentPage])) { // array_reverse

@@ -48,7 +48,6 @@ test(function () {
 	$presenter['menu']->setSubLevel(1);
 
 	Assert::same(implode("\n", [
-		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
 		'		<span class="menu__item">News 2014</span>',
@@ -73,7 +72,6 @@ test(function () {
 	$presenter['menu']->setSubLevel(1);
 
 	Assert::same(implode("\n", [
-		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
 		'		<span class="menu__item">News 2014</span>',
@@ -97,9 +95,6 @@ test(function () {
 	$presenter['menu'] = new MenuControl($navigation);
 	$presenter['menu']->setSubLevel(1);
 
-	Assert::same(implode("\n", [
-		'',
-		'',
-	]), renderControl($presenter['menu']));
+	Assert::same('', renderControl($presenter['menu']));
 
 });

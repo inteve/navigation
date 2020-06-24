@@ -34,7 +34,6 @@ test(function () {
 	$presenter['menu']->setSubTree('news');
 
 	Assert::same(implode("\n", [
-		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
 		'		<span class="menu__item">News 2014</span>',
@@ -58,7 +57,6 @@ test(function () {
 	$presenter['menu'] = new MenuControl($navigation);
 
 	Assert::same(implode("\n", [
-		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
 		'		<a href="/" class="menu__item">Homepage</a>',
@@ -80,7 +78,6 @@ test(function () {
 	$presenter['menu'] = new MenuControl($navigation);
 
 	Assert::same(implode("\n", [
-		'',
 		'<div class="menu">',
 		'	<div class="menu__inner">',
 		'		<a href="/" class="menu__item">Homepage</a>',
@@ -101,9 +98,6 @@ test(function () {
 	$presenter['menu'] = new MenuControl($navigation);
 	$presenter['menu']->setIgnoredPages(['/', 'news/']);
 
-	Assert::same(implode("\n", [
-		'',
-		'',
-	]), renderControl($presenter['menu']));
+	Assert::same('', renderControl($presenter['menu']));
 
 });

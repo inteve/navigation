@@ -29,7 +29,6 @@ test(function () {
 	$presenter['breadcrumbs'] = new BreadcrumbsControl($navigation);
 
 	Assert::same(implode("\n", [
-		'',
 		'<div class="breadcrumbs">',
 		'	<div class="breadcrumbs__inner">',
 		'		<span class="breadcrumbs__separator">/</span>',

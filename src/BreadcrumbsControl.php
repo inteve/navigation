@@ -13,6 +13,9 @@
 		/** @var string */
 		private $templateFile;
 
+		/** @var array */
+		private $templateParameters;
+
 
 		public function __construct(Navigation $navigation)
 		{
@@ -25,12 +28,13 @@
 		 * @param  string  file path or template name
 		 * @return self
 		 */
-		public function setTemplateFile($file)
+		public function setTemplateFile($file, array $parameters = [])
 		{
 			if ($file === self::TEMPLATE_DEFAULT) {
 				$file = __DIR__ . '/templates/breadcrumbs/' . $file . '.latte';
 			}
 			$this->templateFile = $file;
+			$this->templateParameters = $parameters;
 			return $this;
 		}
 
@@ -41,6 +45,7 @@
 		public function render()
 		{
 			$template = $this->createTemplate();
+			$template->setParameters($this->templateParameters);
 			$template->items = $this->navigation->getBreadcrumbs();
 			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
 			$template->render($this->templateFile);

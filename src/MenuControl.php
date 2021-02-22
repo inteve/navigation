@@ -23,6 +23,9 @@
 		/** @var string */
 		private $templateFile;
 
+		/** @var array */
+		private $templateParameters;
+
 		/** @var array|NULL */
 		private $ignoredPages;
 
@@ -38,7 +41,7 @@
 		 * @param  string  file path or template name
 		 * @return self
 		 */
-		public function setTemplateFile($file)
+		public function setTemplateFile($file, array $parameters = [])
 		{
 			if ($file === self::TEMPLATE_DEFAULT
 				|| $file === self::TEMPLATE_BOOTSTRAP2
@@ -46,6 +49,7 @@
 				$file = __DIR__ . '/templates/menu/' . $file . '.latte';
 			}
 			$this->templateFile = $file;
+			$this->templateParameters = $parameters;
 			return $this;
 		}
 
@@ -136,6 +140,7 @@
 			}
 
 			$template = $this->createTemplate();
+			$template->setParameters($this->templateParameters);
 			$template->items = $items;
 			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
 			$template->render($this->templateFile);

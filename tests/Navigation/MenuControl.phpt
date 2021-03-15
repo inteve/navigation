@@ -3,6 +3,7 @@
 use Inteve\Navigation\MenuControl;
 use Inteve\Navigation\Navigation;
 use Inteve\Navigation\NavigationItem;
+use Inteve\Navigation\NavigationPage;
 use Inteve\Navigation\UrlLink;
 use Tester\Assert;
 
@@ -20,6 +21,7 @@ function createNavigation()
 	$navigation->addPage('news/2016/1', 'News 2016 - page 1', '/news/', ['year' => 2016, 'page' => 1]);
 	$navigation->addPage('news/2017', 'News 2017', 'presenterAction', ['year' => 2017]);
 	$navigation->addPage('news/2018', 'News 2018', 'News:default', ['year' => 2018]);
+	$navigation->setPageVisibility('news/2018', NavigationPage::VISIBILITY_HIDDEN);
 
 	return $navigation;
 }
@@ -40,7 +42,6 @@ test(function () {
 		'		<a href="/news/?year=2015" class="menu__item">News 2015</a>',
 		'		<a href="/news/?year=2016" class="menu__item">News 2016</a>',
 		'		<a href="#presenter=presenterAction?year=2017" class="menu__item">News 2017</a>',
-		'		<a href="#presenter=:News:default?year=2018" class="menu__item">News 2018</a>',
 		'	</div>',
 		'</div>',
 		'',

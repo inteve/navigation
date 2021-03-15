@@ -128,6 +128,19 @@
 
 		/**
 		 * @param  string
+		 * @param  int
+		 * @return self
+		 */
+		public function setPageVisibility($pageId, $visibility)
+		{
+			$page = $this->getPage($pageId);
+			$page->setVisibility($visibility);
+			return $this;
+		}
+
+
+		/**
+		 * @param  string
 		 * @return NavigationPage
 		 * @throws MissingException
 		 */
@@ -149,6 +162,25 @@
 		public function getPages()
 		{
 			return $this->pages;
+		}
+
+
+		/**
+		 * @return array<string, NavigationPage>  [pageId => NavigationPage]
+		 */
+		public function getMenuPages()
+		{
+			$result = [];
+
+			foreach ($this->pages as $pageId => $page) {
+				if (!$page->isVisibleInMenu()) {
+					continue;
+				}
+
+				$result[$pageId] = $page;
+			}
+
+			return $result;
 		}
 
 
@@ -234,7 +266,9 @@
 							$items = array_merge($items, array_reverse($this->afterItems[$currentPage]));
 						}
 
-						$items[] = $this->pages[$currentPage];
+						if ($this->pages[$currentPage]->isVisibleInBreadcrumbs()) {
+							$items[] = $this->pages[$currentPage];
+						}
 
 						if (isset($this->beforeItems[$currentPage])) { // array_reverse
 							$items = array_merge($items, array_reverse($this->beforeItems[$currentPage]));

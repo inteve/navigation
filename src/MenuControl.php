@@ -116,7 +116,7 @@
 				return;
 			}
 
-			foreach ($this->navigation->getPages() as $pageId => $page) {
+			foreach ($this->navigation->getMenuPages() as $pageId => $page) {
 				if (isset($this->ignoredPages[$pageId])) {
 					continue;
 				}

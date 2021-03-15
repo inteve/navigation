@@ -5,6 +5,11 @@
 
 	class NavigationPage implements INavigationItem
 	{
+		const VISIBILITY_HIDDEN = 0;
+		const VISIBILITY_ONLY_MENU = 1;
+		const VISIBILITY_ONLY_BREADCRUMBS = 2;
+		const VISIBILITY_MENU_AND_BREADCRUMBS = 3;
+
 		/** @var string */
 		private $id;
 
@@ -13,6 +18,9 @@
 
 		/** @var ILink|NULL */
 		private $link;
+
+		/** @var int */
+		private $visibility = self::VISIBILITY_MENU_AND_BREADCRUMBS;
 
 
 		/**
@@ -71,6 +79,37 @@
 		public function hasLink()
 		{
 			return $this->link !== NULL;
+		}
+
+
+		/**
+		 * @return bool
+		 */
+		public function isVisibleInMenu()
+		{
+			return $this->visibility === self::VISIBILITY_MENU_AND_BREADCRUMBS
+				|| $this->visibility === self::VISIBILITY_ONLY_MENU;
+		}
+
+
+		/**
+		 * @return bool
+		 */
+		public function isVisibleInBreadcrumbs()
+		{
+			return $this->visibility === self::VISIBILITY_MENU_AND_BREADCRUMBS
+				|| $this->visibility === self::VISIBILITY_ONLY_BREADCRUMBS;
+		}
+
+
+		/**
+		 * @param  int  see self::VISIBILITY_*
+		 * @return self
+		 */
+		public function setVisibility($visibility)
+		{
+			$this->visibility = $visibility;
+			return $this;
 		}
 
 

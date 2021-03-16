@@ -141,6 +141,17 @@
 
 		/**
 		 * @param  string
+		 * @return bool
+		 */
+		public function hasPage($pageId)
+		{
+			$pageId = Helpers::normalizePageId($pageId);
+			return isset($this->pages[$pageId]);
+		}
+
+
+		/**
+		 * @param  string
 		 * @return NavigationPage
 		 * @throws MissingException
 		 */

@@ -99,3 +99,13 @@ test(function () {
 	Assert::false($navigation->hasChildren('about'));
 
 });
+
+
+test(function () {
+
+	$navigation = createNavigation();
+	Assert::true($navigation->hasPage('/'));
+	Assert::true($navigation->hasPage('news'));
+	Assert::false($navigation->hasPage('non-exists'));
+
+});

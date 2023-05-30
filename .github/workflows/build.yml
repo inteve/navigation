@@ -21,3 +21,5 @@ jobs:
 
     static-analysis:
         uses: janpecha/actions/.github/workflows/phpstan.yml@master
+        with:
+            extensions: phpstan/phpstan-nette

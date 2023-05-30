@@ -12,8 +12,8 @@
 
 
 		/**
-		 * @param  string|ILink|NULL
-		 * @param  array|NULL
+		 * @param  string|ILink|NULL $destination
+		 * @param  array<string, mixed>|NULL $parameters
 		 * @return ILink|NULL
 		 */
 		public static function create($destination, array $parameters = NULL)

@@ -23,10 +23,10 @@
 		/** @var string */
 		private $templateFile;
 
-		/** @var array */
+		/** @var array<string, mixed> */
 		private $templateParameters;
 
-		/** @var array|NULL */
+		/** @var array<string, true>|NULL */
 		private $ignoredPages;
 
 
@@ -38,7 +38,8 @@
 
 
 		/**
-		 * @param  string  file path or template name
+		 * @param  string $file  file path or template name
+		 * @param  array<string, mixed> $parameters
 		 * @return self
 		 */
 		public function setTemplateFile($file, array $parameters = [])
@@ -56,6 +57,8 @@
 
 		/**
 		 * @deprecated  use setSubTree()
+		 * @param  string|NULL $parentPage
+		 * @return self
 		 */
 		public function setParentPage($parentPage)
 		{
@@ -64,17 +67,19 @@
 
 
 		/**
-		 * @param  string|NULL
+		 * @param  string|NULL $subTree
+		 * @return self
 		 */
 		public function setSubTree($subTree)
 		{
-			$this->subTree = Helpers::normalizePageId($subTree);
+			$this->subTree = $subTree !== NULL ? Helpers::normalizePageId($subTree) : NULL;
 			return $this;
 		}
 
 
 		/**
-		 * @param  int|NULL
+		 * @param  int|NULL $subLevel
+		 * @return self
 		 */
 		public function setSubLevel($subLevel)
 		{
@@ -84,7 +89,8 @@
 
 
 		/**
-		 * @param  string[]|NULL
+		 * @param  string[]|NULL $ignoredPages
+		 * @return self
 		 */
 		public function setIgnoredPages(array $ignoredPages = NULL)
 		{
@@ -140,6 +146,7 @@
 			}
 
 			$template = $this->createTemplate();
+			assert($template instanceof \Nette\Bridges\ApplicationLatte\DefaultTemplate);
 			$template->setParameters($this->templateParameters);
 			$template->items = $items;
 			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
@@ -172,7 +179,7 @@
 			while (Helpers::getPageLevel($currentPage) >= $requiredLevel) {
 				$currentPage = Helpers::getParent($currentPage);
 
-				if ($currentPage === '') {
+				if ($currentPage === '' || $currentPage === NULL) {
 					break;
 				}
 			}

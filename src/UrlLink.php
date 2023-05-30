@@ -8,12 +8,13 @@
 		/** @var string */
 		private $url;
 
-		/** @var array */
+		/** @var array<string, mixed> */
 		private $parameters;
 
 
 		/**
-		 * @param  string
+		 * @param  string $url
+		 * @param  array<string, mixed> $parameters
 		 */
 		public function __construct($url, array $parameters = [])
 		{
@@ -22,18 +23,12 @@
 		}
 
 
-		/**
-		 * @return string
-		 */
 		public function getDestination()
 		{
 			return $this->url;
 		}
 
 
-		/**
-		 * @return array
-		 */
 		public function getParameters()
 		{
 			return $this->parameters;

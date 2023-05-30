@@ -13,7 +13,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $label
 		 */
 		public function __construct($label, ILink $link = NULL)
 		{
@@ -32,7 +32,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $label
 		 * @return self
 		 */
 		public function setLabel($label)
@@ -61,9 +61,9 @@
 
 
 		/**
-		 * @param  string
-		 * @param  string|ILink|NULL
-		 * @param  array|NULL
+		 * @param  string $label
+		 * @param  string|ILink|NULL $destination
+		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
 		public static function create($label, $destination = NULL, array $parameters = NULL)

@@ -8,12 +8,13 @@
 		/** @var string */
 		private $destination;
 
-		/** @var array */
+		/** @var array<string, mixed> */
 		private $parameters;
 
 
 		/**
-		 * @param  string  absolute presenter path or action name or 'this'
+		 * @param  string $destination  absolute presenter path or action name or 'this'
+		 * @param  array<string, mixed> $parameters
 		 */
 		public function __construct($destination, array $parameters = [])
 		{
@@ -26,18 +27,12 @@
 		}
 
 
-		/**
-		 * @return string
-		 */
 		public function getDestination()
 		{
 			return $this->destination;
 		}
 
 
-		/**
-		 * @return array
-		 */
 		public function getParameters()
 		{
 			return $this->parameters;

@@ -14,7 +14,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $pageId
 		 * @return string
 		 */
 		public static function normalizePageId($pageId)
@@ -24,7 +24,7 @@
 
 
 		/**
-		 * @param  string|NavigationPage
+		 * @param  string|NavigationPage $pageId
 		 * @return string
 		 */
 		public static function extractPageId($pageId)
@@ -38,7 +38,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $pageId
 		 * @return int
 		 */
 		public static function getPageLevel($pageId)
@@ -48,8 +48,8 @@
 
 
 		/**
-		 * @param  string
-		 * @param  string
+		 * @param  string $child
+		 * @param  string $parent
 		 * @return bool
 		 */
 		public static function isUnderPath($child, $parent)
@@ -66,7 +66,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $pageId
 		 * @return string|NULL
 		 */
 		public static function getParent($pageId)

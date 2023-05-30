@@ -13,7 +13,7 @@
 		/** @var string */
 		private $templateFile;
 
-		/** @var array */
+		/** @var array<string, mixed> */
 		private $templateParameters;
 
 
@@ -25,7 +25,8 @@
 
 
 		/**
-		 * @param  string  file path or template name
+		 * @param  string $file  file path or template name
+		 * @param  array<string, mixed> $parameters
 		 * @return self
 		 */
 		public function setTemplateFile($file, array $parameters = [])
@@ -45,6 +46,7 @@
 		public function render()
 		{
 			$template = $this->createTemplate();
+			assert($template instanceof \Nette\Bridges\ApplicationLatte\DefaultTemplate);
 			$template->setParameters($this->templateParameters);
 			$template->items = $this->navigation->getBreadcrumbs();
 			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);

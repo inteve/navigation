@@ -15,8 +15,7 @@
 
 
 		/**
-		 * @param  Presenter
-		 * @param  string|NULL
+		 * @param  string|NULL $basePath
 		 */
 		public function __construct(Presenter $presenter, $basePath)
 		{

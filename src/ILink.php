@@ -12,7 +12,7 @@
 
 
 		/**
-		 * @return array
+		 * @return array<string, mixed>
 		 */
 		function getParameters();
 	}

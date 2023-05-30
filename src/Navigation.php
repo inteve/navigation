@@ -27,7 +27,7 @@
 
 
 		/**
-		 * @param  string|NavigationPage|NULL
+		 * @param  string|NavigationPage|NULL $defaultPage
 		 * @return self
 		 */
 		public function setDefaultPage($defaultPage)
@@ -38,7 +38,7 @@
 
 
 		/**
-		 * @param  string|NavigationPage|NULL
+		 * @param  string|NavigationPage|NULL $currentPage
 		 * @return self
 		 */
 		public function setCurrentPage($currentPage)
@@ -58,7 +58,7 @@
 
 
 		/**
-		 * @param  string|NavigationPage
+		 * @param  string|NavigationPage $page
 		 * @return bool
 		 */
 		public function isPageCurrent($page)
@@ -68,7 +68,7 @@
 
 
 		/**
-		 * @param  string|NavigationPage
+		 * @param  string|NavigationPage $page
 		 * @return bool
 		 */
 		public function isPageActive($page)
@@ -89,10 +89,10 @@
 
 
 		/**
-		 * @param  string
-		 * @param  string|NavigationPage|INavigationItem
-		 * @param  string|NULL
-		 * @param  string|NULL
+		 * @param  string $id
+		 * @param  string|NavigationPage|INavigationItem $label
+		 * @param  string|NULL $link
+		 * @param  array<string, mixed> $parameters
 		 * @return self
 		 * @throws DuplicateException
 		 */
@@ -114,8 +114,8 @@
 
 
 		/**
-		 * @param  string
-		 * @param  string
+		 * @param  string $pageId
+		 * @param  string $label
 		 * @return self
 		 */
 		public function setPageLabel($pageId, $label)
@@ -127,8 +127,8 @@
 
 
 		/**
-		 * @param  string
-		 * @param  int
+		 * @param  string $pageId
+		 * @param  NavigationPage::VISIBILITY_* $visibility
 		 * @return self
 		 */
 		public function setPageVisibility($pageId, $visibility)
@@ -140,7 +140,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $pageId
 		 * @return bool
 		 */
 		public function hasPage($pageId)
@@ -151,7 +151,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $pageId
 		 * @return NavigationPage
 		 * @throws MissingException
 		 */
@@ -196,7 +196,7 @@
 
 
 		/**
-		 * @param  string|NavigationPage
+		 * @param  string|NavigationPage $pageId
 		 * @return bool
 		 */
 		public function hasChildren($pageId)
@@ -218,9 +218,9 @@
 
 
 		/**
-		 * @param  string|INavigationItem
-		 * @param  string|NULL
-		 * @param  string|NULL
+		 * @param  string|INavigationItem $label
+		 * @param  string|NULL $link
+		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
 		public function addItem($label, $link = NULL, array $parameters = NULL)
@@ -231,10 +231,10 @@
 
 
 		/**
-		 * @param  string|NavigationPage
-		 * @param  string|INavigationItem
-		 * @param  string|NULL
-		 * @param  string|NULL
+		 * @param  string|NavigationPage $pageId
+		 * @param  string|INavigationItem $label
+		 * @param  string|NULL $link
+		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
 		public function addItemBefore($pageId, $label, $link = NULL, array $parameters = NULL)
@@ -246,10 +246,10 @@
 
 
 		/**
-		 * @param  string|NavigationPage
-		 * @param  string|INavigationItem
-		 * @param  string|NULL
-		 * @param  string|NULL
+		 * @param  string|NavigationPage $pageId
+		 * @param  string|INavigationItem $label
+		 * @param  string|NULL $link
+		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
 		public function addItemAfter($pageId, $label, $link = NULL, array $parameters = NULL)
@@ -322,9 +322,9 @@
 
 
 		/**
-		 * @param  string|INavigationItem
-		 * @param  string|NULL
-		 * @param  string|NULL
+		 * @param  string|INavigationItem $label
+		 * @param  string|NULL $link
+		 * @param  array<string, mixed>|NULL $parameters
 		 * @return INavigationItem
 		 */
 		private function createItem($label, $link = NULL, array $parameters = NULL)

@@ -19,13 +19,13 @@
 		/** @var ILink|NULL */
 		private $link;
 
-		/** @var int */
+		/** @var self::VISIBILITY_* */
 		private $visibility = self::VISIBILITY_MENU_AND_BREADCRUMBS;
 
 
 		/**
-		 * @param  string
-		 * @param  string
+		 * @param  string $id
+		 * @param  string $label
 		 */
 		public function __construct($id, $label, ILink $link = NULL)
 		{
@@ -54,7 +54,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $label
 		 * @return self
 		 */
 		public function setLabel($label)
@@ -103,7 +103,7 @@
 
 
 		/**
-		 * @param  int  see self::VISIBILITY_*
+		 * @param  self::VISIBILITY_* $visibility
 		 * @return self
 		 */
 		public function setVisibility($visibility)
@@ -123,7 +123,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $pageId
 		 * @return bool
 		 */
 		public function isDescendantOf($pageId)
@@ -133,7 +133,7 @@
 
 
 		/**
-		 * @param  string
+		 * @param  string $pageId
 		 * @return bool
 		 */
 		public function isChildOf($pageId)
@@ -152,10 +152,10 @@
 
 
 		/**
-		 * @param  string
-		 * @param  string
-		 * @param  string|ILink|NULL
-		 * @param  array|NULL
+		 * @param  string $id
+		 * @param  string $label
+		 * @param  string|ILink|NULL $destination
+		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
 		public static function create($id, $label, $destination = NULL, array $parameters = NULL)

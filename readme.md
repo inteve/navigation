@@ -1,7 +1,7 @@
 
 # Inteve\Navigation
 
-[![Tests Status](https://github.com/inteve/navigation/workflows/Tests/badge.svg)](https://github.com/inteve/navigation/actions)
+[![Build Status](https://github.com/inteve/navigation/workflows/Build/badge.svg)](https://github.com/inteve/navigation/actions)
 
 Navigation component for Nette Framework.
 

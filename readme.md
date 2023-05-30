@@ -1,7 +1,9 @@
-
 # Inteve\Navigation
 
 [![Build Status](https://github.com/inteve/navigation/workflows/Build/badge.svg)](https://github.com/inteve/navigation/actions)
+[![Downloads this Month](https://img.shields.io/packagist/dm/inteve/navigation.svg)](https://packagist.org/packages/inteve/navigation)
+[![Latest Stable Version](https://poser.pugx.org/inteve/navigation/v/stable)](https://github.com/inteve/navigation/releases)
+[![License](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://github.com/inteve/navigation/blob/master/license.md)
 
 Navigation component for Nette Framework.
 

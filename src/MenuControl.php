@@ -146,8 +146,12 @@
 			}
 
 			$template = $this->createTemplate();
-			assert($template instanceof \Nette\Bridges\ApplicationLatte\DefaultTemplate);
-			$template->setParameters($this->templateParameters);
+			assert($template instanceof \Nette\Bridges\ApplicationLatte\Template);
+
+			foreach ($this->templateParameters as $paramName => $paramValue) {
+				$template->{$paramName} = $paramValue;
+			}
+
 			$template->items = $items;
 			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
 			$template->render($this->templateFile);

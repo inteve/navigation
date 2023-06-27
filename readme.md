@@ -63,7 +63,7 @@ $breadcrumbs = $navigation->getBreadcrumbs();
 use Inteve\Navigation\Navigation;
 use Inteve\Navigation\MenuControl;
 
-class NewsPresenter extends Nette\Application\UI\Form
+class NewsPresenter extends Nette\Application\UI\Presenter
 {
 	/** @var Navigation @inject */
 	public $navigation;
@@ -106,7 +106,7 @@ In Latte template:
 use Inteve\Navigation\Navigation;
 use Inteve\Navigation\BreadcrumbsControl;
 
-class Presenter extends Nette\Application\UI\Form
+class Presenter extends Nette\Application\UI\Presenter
 {
 	/** @var Navigation @inject */
 	public $navigation;

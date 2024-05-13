@@ -20,6 +20,9 @@
 		/** @var int|NULL */
 		private $subLevel;
 
+		/** @var int|NULL */
+		private $levelLimit = 1;
+
 		/** @var string */
 		private $templateFile;
 
@@ -89,6 +92,17 @@
 
 
 		/**
+		 * @param  int|NULL $levelLimit
+		 * @return self
+		 */
+		public function setLevelLimit($levelLimit)
+		{
+			$this->levelLimit = $levelLimit > 0 ? $levelLimit : NULL;
+			return $this;
+		}
+
+
+		/**
 		 * @param  string[]|NULL $ignoredPages
 		 * @return self
 		 */
@@ -122,7 +136,41 @@
 				return;
 			}
 
-			foreach ($this->navigation->getMenuPages() as $pageId => $page) {
+			$menuPages = $this->navigation->getMenuPages();
+			$this->prepareItems($items, $menuPages, $subTree);
+
+			$template = $this->createTemplate();
+			assert($template instanceof \Nette\Bridges\ApplicationLatte\Template);
+
+			foreach ($this->templateParameters as $paramName => $paramValue) {
+				$template->{$paramName} = $paramValue;
+			}
+
+			$template->items = $items;
+			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
+			$template->render($this->templateFile);
+		}
+
+
+		/**
+		 * @param  array<array{
+		 *   page: NavigationPage,
+		 *   active: bool,
+		 *   level: int,
+		 * }> $items
+		 * @param  array<string, NavigationPage> $menuPages
+		 * @param  string $subTree
+		 * @param  int $level
+		 * @return void
+		 */
+		private function prepareItems(
+			array &$items,
+			array $menuPages,
+			$subTree,
+			$level = 0
+		)
+		{
+			foreach ($menuPages as $pageId => $page) {
 				if (isset($this->ignoredPages[$pageId])) {
 					continue;
 				}
@@ -140,21 +188,14 @@
 					$items[] = [
 						'page' => $page,
 						'active' => $active,
-						'level' => 0,
+						'level' => $level,
 					];
+
+					if ($active && ($this->levelLimit === NULL || ($level + 1) < $this->levelLimit)) {
+						$this->prepareItems($items, $menuPages, $pageId, $level + 1);
+					}
 				}
 			}
-
-			$template = $this->createTemplate();
-			assert($template instanceof \Nette\Bridges\ApplicationLatte\Template);
-
-			foreach ($this->templateParameters as $paramName => $paramValue) {
-				$template->{$paramName} = $paramValue;
-			}
-
-			$template->items = $items;
-			$template->linkGenerator = new DefaultLinkGenerator($this->getPresenter(), $template->basePath);
-			$template->render($this->templateFile);
 		}
 
 

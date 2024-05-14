@@ -129,7 +129,6 @@
 		 */
 		public function render()
 		{
-			$items = [];
 			$subTree = $this->findSubTree();
 
 			if ($subTree === NULL) { // no subtree => no items
@@ -137,7 +136,7 @@
 			}
 
 			$menuPages = $this->navigation->getMenuPages();
-			$this->prepareItems($items, $menuPages, $subTree);
+			$items = $this->prepareItems($menuPages, $subTree);
 
 			$template = $this->createTemplate();
 			assert($template instanceof \Nette\Bridges\ApplicationLatte\Template);
@@ -153,29 +152,32 @@
 
 
 		/**
-		 * @param  array<array{
-		 *   page: NavigationPage,
-		 *   active: bool,
-		 *   level: int,
-		 * }> $items
 		 * @param  array<string, NavigationPage> $menuPages
 		 * @param  string $subTree
 		 * @param  int $level
-		 * @return void
+		 * @return array<array{
+		 *   page: NavigationPage,
+		 *   active: bool,
+		 *   level: int,
+		 *   link: ILink|NULL,
+		 * }>
 		 */
 		private function prepareItems(
-			array &$items,
 			array $menuPages,
 			$subTree,
 			$level = 0
 		)
 		{
+			$items = [];
+
 			foreach ($menuPages as $pageId => $page) {
 				if (isset($this->ignoredPages[$pageId])) {
 					continue;
 				}
 
-				if ($page->isChildOf($subTree)) {
+				if (!$page->isChildOf($subTree)) {
+					continue;
+				}
 					$active = FALSE;
 
 					if ($page->isHomepage()) {
@@ -185,17 +187,31 @@
 						$active = $this->navigation->isPageActive($pageId);
 					}
 
-					$items[] = [
+					$item = [
 						'page' => $page,
 						'active' => $active,
 						'level' => $level,
+						'link' => $page->getLink(),
 					];
+					$subItems = $pageId !== '' ? $this->prepareItems($menuPages, $pageId, $level + 1) : [];
+
+					if ($item['link'] === NULL) {
+						foreach ($subItems as $subItem) {
+							if ($subItem['link'] !== NULL) {
+								$item['link'] = $subItem['link'];
+								break;
+							}
+						}
+					}
+
+					$items[] = $item;
 
 					if ($active && ($this->levelLimit === NULL || ($level + 1) < $this->levelLimit)) {
-						$this->prepareItems($items, $menuPages, $pageId, $level + 1);
+						$items = array_merge($items, $subItems);
 					}
-				}
 			}
+
+			return $items;
 		}
 
 

@@ -22,7 +22,7 @@
 		"classmap": ["src/"]
 	},
 	"require-dev": {
-		"nette/tester": "^2.0",
+		"nette/tester": "^2.5",
 		"nette/http": "^2.4 || ^3.0"
 	},
 	"extra": {

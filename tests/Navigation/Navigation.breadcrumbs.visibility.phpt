@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Inteve\Navigation\Navigation;
 use Inteve\Navigation\NavigationItem;
 use Inteve\Navigation\NavigationPage;

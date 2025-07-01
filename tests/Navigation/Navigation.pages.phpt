@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Inteve\Navigation\Navigation;
 use Tester\Assert;
 

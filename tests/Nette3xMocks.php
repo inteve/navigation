@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class LatteFactory implements \Nette\Bridges\ApplicationLatte\ILatteFactory
 {
 	public function create(): \Latte\Engine

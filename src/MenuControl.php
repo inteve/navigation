@@ -108,7 +108,7 @@
 		 * @param  string[]|NULL $ignoredPages
 		 * @return self
 		 */
-		public function setIgnoredPages(array $ignoredPages = NULL)
+		public function setIgnoredPages(?array $ignoredPages)
 		{
 			if ($ignoredPages === NULL) {
 				$this->ignoredPages = NULL;

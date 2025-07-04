@@ -18,7 +18,7 @@
 		 * @param  array<string, mixed>|NULL $parameters
 		 * @return ILink|NULL
 		 */
-		public static function create($destination, array $parameters = NULL)
+		public static function create($destination, ?array $parameters = NULL)
 		{
 			if ($destination === NULL) {
 				if ($parameters !== NULL) {

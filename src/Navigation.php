@@ -98,7 +98,7 @@
 		 * @return self
 		 * @throws DuplicateException
 		 */
-		public function addPage($id, $label, $link = NULL, array $parameters = NULL)
+		public function addPage($id, $label, $link = NULL, ?array $parameters = NULL)
 		{
 			$page = NULL;
 
@@ -225,7 +225,7 @@
 		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
-		public function addItem($label, $link = NULL, array $parameters = NULL)
+		public function addItem($label, $link = NULL, ?array $parameters = NULL)
 		{
 			$this->items[] = $this->createItem($label, $link, $parameters);
 			return $this;
@@ -239,7 +239,7 @@
 		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
-		public function addItemBefore($pageId, $label, $link = NULL, array $parameters = NULL)
+		public function addItemBefore($pageId, $label, $link = NULL, ?array $parameters = NULL)
 		{
 			$pageId = Helpers::extractPageId($pageId);
 			$this->beforeItems[$pageId][] = $this->createItem($label, $link, $parameters);
@@ -254,7 +254,7 @@
 		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
-		public function addItemAfter($pageId, $label, $link = NULL, array $parameters = NULL)
+		public function addItemAfter($pageId, $label, $link = NULL, ?array $parameters = NULL)
 		{
 			$pageId = Helpers::extractPageId($pageId);
 			$this->afterItems[$pageId][] = $this->createItem($label, $link, $parameters);
@@ -329,7 +329,7 @@
 		 * @param  array<string, mixed>|NULL $parameters
 		 * @return INavigationItem
 		 */
-		private function createItem($label, $link = NULL, array $parameters = NULL)
+		private function createItem($label, $link = NULL, ?array $parameters = NULL)
 		{
 			if ($label instanceof INavigationItem) {
 				return $label;

@@ -17,7 +17,7 @@
 		/**
 		 * @param  string $label
 		 */
-		public function __construct($label, ILink $link = NULL)
+		public function __construct($label, ?ILink $link = NULL)
 		{
 			$this->label = $label;
 			$this->link = $link;
@@ -68,7 +68,7 @@
 		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
-		public static function create($label, $destination = NULL, array $parameters = NULL)
+		public static function create($label, $destination = NULL, ?array $parameters = NULL)
 		{
 			return new self($label, LinkFactory::create($destination, $parameters));
 		}

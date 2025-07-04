@@ -29,7 +29,7 @@
 		 * @param  string $id
 		 * @param  string $label
 		 */
-		public function __construct($id, $label, ILink $link = NULL)
+		public function __construct($id, $label, ?ILink $link = NULL)
 		{
 			$this->id = Helpers::normalizePageId($id);
 			$this->label = $label;
@@ -160,7 +160,7 @@
 		 * @param  array<string, mixed>|NULL $parameters
 		 * @return self
 		 */
-		public static function create($id, $label, $destination = NULL, array $parameters = NULL)
+		public static function create($id, $label, $destination = NULL, ?array $parameters = NULL)
 		{
 			return new self($id, $label, LinkFactory::create($destination, $parameters));
 		}
